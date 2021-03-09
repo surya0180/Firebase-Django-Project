@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Main Page</title>
+</head>
+{% block content %}
+<body>
+    <div class="parent">
+        <div class="child">
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        </div>
+        <div class="child" id="P1258">
+            <a href="{% url 'profiles' %}" style="text-decoration: none;">Profiles</a>
+        </div>
+    </div>
+    <div id="id01" class="modal">
+        <form class="modal-content animate"  action="saveData" method="post" enctype="multipart/form-data">
+            
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="{% static 'photo.jpg' %}" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                {% csrf_token %}
+                <label for="firstname"><b>Firstname</b></label>
+                <input type="text" placeholder="Enter Firstname" name="firstname" required>
+
+                <label for="lastname"><b>Lastname</b></label>
+                <input type="text" placeholder="Enter Lastname" name="lastname" required>
+
+                <label for="image"> <b> Select image: </b><br></label> <br>
+                <input type="file" id="image" name="image" accept="image/*"><br><br>
+                    
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'actions.js' %}"></script>
+    {% endblock  %}
+</body>
+</html>
